@@ -3,7 +3,6 @@ package exec
 import (
 	"crypto/sha256"
 	"fmt"
-	"io"
 	"os"
 	"os/exec"
 	"path/filepath"

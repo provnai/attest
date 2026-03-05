@@ -147,11 +147,6 @@ restore the last known good state.`,
 
 		fmt.Printf("%s Rolled back to last safe checkpoint\n", green("✓"))
 		fmt.Printf("  Files restored:    %d\n", result.RestoredFiles)
-		fmt.Printf("  Duration:          %v\n", result.Duration)
-
-		_ = cyan
-		_ = yellow
-
 		return nil
 	},
 }
@@ -204,12 +199,6 @@ var rollbackStatusCmd = &cobra.Command{
 	},
 }
 
-func confirmRollback() (bool, error) {
-	fmt.Print("Type 'ROLLBACK' to confirm: ")
-	var input string
-	fmt.Scanln(&input)
-	return input == "ROLLBACK", nil
-}
 
 func init() {
 	rollbackCmd.AddCommand(rollbackToCheckpointCmd)

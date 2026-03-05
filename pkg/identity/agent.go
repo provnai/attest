@@ -1,7 +1,6 @@
 package identity
 
 import (
-	"crypto/sha256"
 	"database/sql"
 	"encoding/base64"
 	"encoding/json"
@@ -192,7 +191,8 @@ func (s *AgentStore) ListAll(includeRevoked bool) ([]*Agent, error) {
 		if err := rows.Scan(&id, &name, &agentType, &pubKey, &createdAt, &revokedAt, &metadata); err != nil {
 			return nil, err
 		}
-
+		
+		var meta AgentMeta
 		if err := json.Unmarshal([]byte(metadata), &meta); err != nil {
 			return nil, fmt.Errorf("failed to unmarshal metadata: %w", err)
 		}
