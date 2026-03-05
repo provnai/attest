@@ -231,8 +231,8 @@ mod linux_impl {
             resource_handles::Hierarchy,
         },
         structures::{
-            Auth, KeyedHashScheme, Private, Public, PublicBuffer, PublicBuilder,
-            PublicKeyedHashParameters, PublicRsaParametersBuilder, RsaExponent, SensitiveData,
+            KeyedHashScheme, Private, Public, PublicBuffer, PublicBuilder,
+            PublicKeyedHashParameters, RsaExponent, SensitiveData,
             SymmetricDefinitionObject,
         },
         tcti_ldr::TctiNameConf,

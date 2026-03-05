@@ -1,5 +1,7 @@
 use crate::traits::{self, ConnectionInfo};
-use anyhow::Result;
+#[allow(unused_imports)]
+use anyhow::{anyhow, Result};
+#[allow(unused_imports)]
 use std::net::{Ipv4Addr, Ipv6Addr, SocketAddr};
 use std::sync::Arc;
 use tokio::sync::Mutex;
@@ -186,7 +188,6 @@ mod windows_impl {
 mod stub_impl {
     use super::*;
     use std::fs;
-    use std::path::Path;
 
     pub struct ProcFsWatchman;
 

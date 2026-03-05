@@ -15,6 +15,12 @@ pub struct ProvnAnchor {
     pub agent: Arc<AttestAgent>,
 }
 
+impl std::fmt::Debug for ProvnAnchor {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.debug_struct("ProvnAnchor").finish_non_exhaustive()
+    }
+}
+
 #[async_trait]
 impl AnchorBackend for ProvnAnchor {
     fn name(&self) -> &str {
