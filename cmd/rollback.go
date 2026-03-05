@@ -131,9 +131,7 @@ restore the last known good state.`,
 			return fmt.Errorf("no active checkpoints found")
 		}
 
-		cyan := color.New(color.FgCyan).SprintFunc()
 		green := color.New(color.FgGreen).SprintFunc()
-		yellow := color.New(color.FgYellow).SprintFunc()
 
 		fmt.Println()
 		fmt.Printf("Last safe checkpoint found: %s\n", lastActive.ID)
