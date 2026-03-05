@@ -5,22 +5,22 @@ The project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html
 
 ## [v0.1.0] - 2026-03-05
 
-This is the production-ready release focusing on ZK-STARK hardening and deep integration into the VEX ecosystem.
+### ⚓ The Silicon-Rooted Release
+This release bridges the gap between cognitive AI and physical machine security, providing hardware-sealed identity and mathematical finality via ZK-STARKs.
 
 ### Added
-- **Hardware-Rooted Zeroization**: The `vex-hardware` layer now enforces strict memory zeroization (`Zeroize` trait) for all sensitive cryptographic material.
-- **Glassbox Provenance (VEX Binding)**:
-  - Agent cognitive cycles and evolutionary mutations are now signed by hardware and bound to the VEX `AuditStore`.
-  - JCS (RFC 8785) deterministic serialization for reproducible hardware signatures.
-- **ZK-STARK Security Hardening**: 
-  - Automated verifier circuitry protection against serialization corruption and public input forgery.
-- **Pure-Go SQLite Bridge**: Removed CGO dependencies for absolute cross-platform portability.
+- **Hardware-Sealed Identity**: 
+  - Native TPM 2.0 (Linux) via `tss-esapi` and Microsoft CNG (Windows) support for **Industrial Strength** key protection.
+  - **No More "Hot Keys"**: Keys are sealed to the Secure Element and never exposed in plaintext.
+  - **Deterministic Attribution**: Agent IDs (`aid:...`) are cryptographically derived from hardware, ensuring 1:1 accountability.
+- **ZK-STARK Audit Trails (Mathematical Finality)**:
+  - **Plonky3 Engine**: High-performance proofs using Goldilocks fields and Two-Adic FRI.
+  - **Audit-as-Code**: Generate proofs verifiable by third parties without data exposure.
+- **Quantum Undo System**:
+  - **Reversible State**: Automatic filesystem snapshots before every `attest exec`.
+  - **Instant Rollback**: Revert to known-verified states via `attest quantum undo`.
+- **Pure-Go SQLite Bridge**: 100% portable CGO-free storage for seamless deployment anywhere.
 
-### Changed
-- Re-licensed project to **Apache 2.0** for robust patent protection.
-- Fully revitalized documentation to align with VEX open-source standards.
-
----
 
 ## [v0.1.0-alpha] - 2026-02-05
 
