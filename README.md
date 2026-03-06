@@ -7,6 +7,7 @@ Hardware identity • ZK-STARK audit trails • Glassbox Provenance • Producti
 [![GitHub Stars](https://img.shields.io/github/stars/provnai/attest?style=flat-square&color=gold)](https://github.com/provnai/attest/stargazers)
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg?style=flat-square)](https://opensource.org/licenses/Apache-2.0)
 [![CI](https://github.com/provnai/attest/actions/workflows/ci.yml/badge.svg)](https://github.com/provnai/attest/actions)
+[![Go Reference](https://img.shields.io/badge/go.dev-reference-007d9c?logo=go&logoColor=white&style=flat-square)](https://pkg.go.dev/github.com/provnai/attest)
 
 
 [📚 Documentation](https://provnai.dev/docs) | [🔧 Rustdocs](https://provnai.dev/rustdoc) | [💬 Discord](https://discord.gg/provnai)
