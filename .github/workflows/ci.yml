@@ -3,6 +3,7 @@ name: CI
 on:
   push:
     branches: [ main, master ]
+    tags: [ 'v*' ]
   pull_request:
     branches: [ main, master ]
 
@@ -98,7 +99,6 @@ jobs:
       run: golangci-lint run ./...
 
   build-release:
-    runs-on: ubuntu-latest
     needs: [test, lint]
     if: startsWith(github.ref, 'refs/tags/v')
     strategy:
@@ -108,6 +108,7 @@ jobs:
         exclude:
           - os: windows-latest
             arch: arm64
+    runs-on: ${{ matrix.os }}
 
     steps:
     - uses: actions/checkout@v4
@@ -117,12 +118,44 @@ jobs:
       with:
         go-version: '1.24'
 
-    - name: Build release
+    - name: Install Rust toolchain
+      uses: actions-rs/toolchain@v1
+      with:
+        profile: minimal
+        toolchain: stable
+        override: true
+
+    - name: Install system dependencies (Linux)
+      if: matrix.os == 'ubuntu-latest'
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y libssl-dev libtss2-dev pkg-config
+
+    - name: Build Rust Core
+      run: |
+        cd attest-rs
+        cargo build --release
+
+    - name: Build release binary
+      shell: bash
       run: |
         GOOS=${{ matrix.os == 'ubuntu-latest' && 'linux' || matrix.os == 'macos-latest' && 'darwin' || 'windows' }}
         GOARCH=${{ matrix.arch }}
-        CGO_ENABLED=0
-        go build -o attest-${GOOS}-${GOARCH} ./cmd/attest
+        BINARY_NAME="attest-${GOOS}-${GOARCH}"
+        if [ "$GOOS" = "windows" ]; then BINARY_NAME="${BINARY_NAME}.exe"; fi
+        
+        # Link against the release build of the Rust core
+        export CGO_ENABLED=1
+        if [ "$GOOS" = "linux" ]; then
+          export CGO_LDFLAGS="-L$(pwd)/attest-rs/target/release -lattest_rs -lssl -lcrypto -ltss2-esys -ltss2-mu -ltss2-tctildr"
+        elif [ "$GOOS" = "darwin" ]; then
+          export CGO_LDFLAGS="-L$(pwd)/attest-rs/target/release -lattest_rs -framework Security"
+        else
+          # Windows linking via MSVC/CNG
+          export CGO_LDFLAGS="-L$(pwd)/attest-rs/target/release -lattest_rs -lbcrypt -lncrypt"
+        fi
+
+        go build -o "$BINARY_NAME" ./cmd/attest
 
     - name: Create release
       uses: softprops/action-gh-release@v1
